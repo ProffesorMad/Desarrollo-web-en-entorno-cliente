@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 4</title>
+  <style>
+    #mensaje {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .error { color: #c00000; }
+    .success { color: #0a8b00; }
+    select {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <form action="/registardatos.php" id="formColores" novalidate>
+    <label for="colores">
+      Seleccione uno o varios colores:
+    </label>
+    <br>
+    <select id="colores" name="colores" multiple size="8">
+      <option value="rojo">Rojo</option>
+      <option value="verde">Verde</option>
+      <option value="azul">Azul</option>
+      <option value="amarillo">Amarillo</option>
+      <option value="naranja">Naranja</option>
+      <option value="morado">Morado</option>
+      <option value="rosa">Rosa</option>
+      <option value="cian">Cian</option>
+      <option value="magenta">Magenta</option>
+      <option value="gris">Gris</option>
+      <option value="negro">Negro</option>
+      <option value="blanco">Blanco</option>
+    </select>
+    <br><br>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("formColores");
+    const mensaje = document.getElementById("mensaje");
+    const select = document.getElementById("colores");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      mensaje.textContent = "";
+      mensaje.className = "";
+
+      const seleccionados = Array.from(select.selectedOptions);
+
+      if (seleccionados.length === 0) {
+        mensaje.textContent = "Debe seleccionar al menos un color.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      mensaje.textContent = "Formulario enviado correctamente";
+      mensaje.classList.add("success");
+      form.reset();
+    });
+  </script>
+</body>
+</html>

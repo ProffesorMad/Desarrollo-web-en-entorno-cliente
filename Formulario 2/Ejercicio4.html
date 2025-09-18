@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 4</title>
+  <style>
+    #mensaje { margin-top: 10px; font-weight: 600; }
+    .error { color: #c00000; }      
+    .success { color: #0a8b00; }
+    label { display: block; margin-top: 8px; font-size: 14px; }
+    input, textarea { margin-top: 4px; font-size: 13px; }
+    textarea { resize: both; }
+    input[type="submit"] { margin-top: 12px; padding: 6px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <form id="formulario" novalidate>
+    <label>
+      Apellido y nombre:
+      <input type="text" id="nombre" name="nombre">
+    </label>
+
+    <label>Es mayor de edad?:</label>
+    <label><input type="radio" name="mayor" value="si" checked> Sí</label>
+    <label><input type="radio" name="mayor" value="no"> No</label>
+
+    <label>
+      Teléfono:
+      <input type="text" id="telefono" name="telefono" value="453-">
+    </label>
+
+    <label>
+      Comentarios:
+      <textarea id="comentarios" name="comentarios" rows="4" cols="40" placeholder="Ingrese aquí sus comentarios"></textarea>
+    </label>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje" role="alert" aria-live="polite"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('formulario');
+    const mensaje = document.getElementById('mensaje');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      mensaje.textContent = '';
+      mensaje.className = '';
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+
+      if (!nombre || !telefono) {
+        mensaje.textContent = 'Falta rellenar un campo obligatorio';
+        mensaje.classList.add('error');
+        return;
+      }
+
+      const regexTelefono = /^453-\d{6}$/;
+      if (!regexTelefono.test(telefono)) {
+        mensaje.textContent = 'El teléfono no es válido. Debe comenzar con 453- y tener 9 dígitos en total';
+        mensaje.classList.add('error');
+        return;
+      }
+
+      form.reset();
+      document.getElementById('telefono').value = '453-';
+      document.querySelector('input[name="mayor"][value="si"]').checked = true;
+
+      mensaje.textContent = 'Enviado correctamente';
+      mensaje.classList.add('success');
+    });
+  </script>
+</body>
+</html>

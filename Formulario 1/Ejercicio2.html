@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 2</title>
+  <style>
+    #mensaje {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .error { color: #c00000; }
+    .success { color: #0a8b00; }
+    textarea {
+      resize: both; 
+    }
+  </style>
+</head>
+<body>
+  <form id="formulario" novalidate action="/registardatos.php">
+    <label>
+      Ingrese su nombre:
+      <input type="text" id="nombre" name="nombre">
+    </label>
+    <br><br>
+
+    <label>
+      Ingrese su mail:
+      <input type="email" id="mail" name="mail">
+    </label>
+    <br><br>
+
+    <label>
+      Comentarios:<br>
+      <textarea id="comentarios" name="comentarios" rows="5" cols="50"></textarea>
+    </label>
+    <br><br>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("formulario");
+    const mensaje = document.getElementById("mensaje");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); 
+      mensaje.textContent = "";
+      mensaje.className = "";
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const mail = document.getElementById("mail").value.trim();
+
+      if (nombre === "" || mail === "") {
+        mensaje.textContent = "Falta un campo obligatorio.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      const correoValido = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+      if (!correoValido.test(mail)) {
+        mensaje.textContent = "Ese correo electrónico no es válido.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      mensaje.textContent = "Formulario enviado correctamente";
+      mensaje.classList.add("success");
+      form.reset();
+    });
+  </script>
+</body>
+</html>

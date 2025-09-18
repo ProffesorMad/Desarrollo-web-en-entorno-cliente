@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    #resultado {
+      font-size: 20px;
+      margin-bottom: 15px;
+      font-weight: bold;
+      display: block;
+      height: 30px;
+    }
+    .teclado {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 10px;
+      justify-content: center;
+    }
+    button {
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Resultado:</h2>
+  <span id="resultado"></span>
+
+  <div class="teclado">
+    <button onclick="insertar('7')">7</button>
+    <button onclick="insertar('8')">8</button>
+    <button onclick="insertar('9')">9</button>
+    <button onclick="insertar('/')">/</button>
+
+    <button onclick="insertar('4')">4</button>
+    <button onclick="insertar('5')">5</button>
+    <button onclick="insertar('6')">6</button>
+    <button onclick="insertar('*')">*</button>
+
+    <button onclick="insertar('1')">1</button>
+    <button onclick="insertar('2')">2</button>
+    <button onclick="insertar('3')">3</button>
+    <button onclick="insertar('+')">+</button>
+
+    <button onclick="insertar('0')">0</button>
+    <button onclick="calcular()">=</button>
+    <button onclick="insertar('-')">-</button>
+    <button onclick="limpiar()">C</button>
+  </div>
+
+  <script>
+    let resultadoMostrado = false;
+
+    function insertar(valor) {
+      const resultado = document.getElementById("resultado");
+
+      if (resultadoMostrado && !isNaN(valor)) {
+        resultado.textContent = "";
+        resultadoMostrado = false;
+      }
+
+      resultado.textContent += valor;
+    }
+
+    function limpiar() {
+      document.getElementById("resultado").textContent = "";
+      resultadoMostrado = false;
+    }
+
+    function calcular() {
+      const resultado = document.getElementById("resultado");
+      try {
+        let expresion = resultado.textContent;
+
+        if (/\/0(?!\d)/.test(expresion)) {
+          throw "Syntax Error";
+        }
+
+        let evaluado = eval(expresion);
+        resultado.textContent = evaluado;
+        resultadoMostrado = true;
+      } catch (e) {
+        resultado.textContent = "Syntax Error";
+        resultadoMostrado = true;
+      }
+    }
+  </script>
+
+</body>
+</html>

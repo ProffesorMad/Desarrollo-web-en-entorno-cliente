@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #mensaje {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+    }
+    .exito {
+      color: green;
+    }
+    .boton {
+      margin-top: 15px; /* separación del botón */
+    }
+  </style>
+</head>
+<body>
+
+  <form action="/registardatos.php" id="formulario">
+    <label for="opcion">Seleccione una fruta o verdura:</label>
+    <select id="opcion">
+      <option value="">--Seleccione--</option>
+      <optgroup label="Frutas">
+        <option value="Naranjas">Naranjas</option>
+        <option value="Manzanas">Manzanas</option>
+        <option value="Frutilla">Frutilla</option>
+        <option value="Durazno">Durazno</option>
+        <option value="Ciruela">Ciruela</option>
+      </optgroup>
+      <optgroup label="Verduras">
+        <option value="Lechuga">Lechuga</option>
+        <option value="Acelga">Acelga</option>
+        <option value="Zapallo">Zapallo</option>
+        <option value="Papas">Papas</option>
+        <option value="Batatas">Batatas</option>
+        <option value="Zanahorias">Zanahorias</option>
+        <option value="Rabanitos">Rabanitos</option>
+        <option value="Calabaza">Calabaza</option>
+      </optgroup>
+    </select>
+    <br>
+    <button type="button" class="boton" onclick="enviarFormulario()">Enviar</button>
+  </form>
+
+  <div id="mensaje"></div>
+
+  <script>
+    function enviarFormulario() {
+      const opcion = document.getElementById("opcion");
+      const mensaje = document.getElementById("mensaje");
+
+      if (opcion.value === "") {
+        mensaje.textContent = "Necesitas elegir una opción";
+        mensaje.className = "error";
+      } else {
+        mensaje.textContent = "Formulario enviado correctamente";
+        mensaje.className = "exito";
+        opcion.value = ""; // vuelve a poner la opción inicial
+      }
+    }
+  </script>
+
+</body>
+</html>

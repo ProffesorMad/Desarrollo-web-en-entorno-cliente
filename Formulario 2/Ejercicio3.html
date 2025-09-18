@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Validado</title>
+  <style>
+    #mensaje { margin-top: 10px; font-weight: 600; }
+    .error { color: #c00000; }      
+    .success { color: #0a8b00; }
+    fieldset { 
+      margin-bottom: 10px; 
+      padding: 8px 12px; 
+      max-width: 350px; 
+      border: 1px solid #999; 
+    }
+    legend { font-weight: bold; }
+    label { display: block; margin-top: 6px; font-size: 14px; }
+    input { margin-top: 3px; width: 95%; padding: 4px; font-size: 13px; }
+    input[type="submit"] { width: auto; padding: 6px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <form id="formulario" novalidate>
+    <fieldset>
+      <legend>Datos personales</legend>
+      <label>
+        Apellido y nombre:
+        <input type="text" id="nombre" name="nombre">
+      </label>
+      <label>
+        Documento de identidad (DNI):
+        <input type="text" id="dni" name="dni">
+      </label>
+      <label>
+        Fecha de nacimiento:
+        <input type="date" id="fecha" name="fecha">
+      </label>
+      <label>
+        Dirección:
+        <input type="text" id="direccion" name="direccion">
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Datos laborales</legend>
+      <label>
+        Nombre de la empresa:
+        <input type="text" id="empresa" name="empresa">
+      </label>
+      <label>
+        Actividad:
+        <input type="text" id="actividad" name="actividad">
+      </label>
+      <label>
+        Dirección:
+        <input type="text" id="direccion_empresa" name="direccion_empresa">
+      </label>
+    </fieldset>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje" role="alert" aria-live="polite"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('formulario');
+    const mensaje = document.getElementById('mensaje');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      mensaje.textContent = '';
+      mensaje.className = '';
+
+      const nombre = form.querySelector('#nombre').value.trim();
+      const dni = form.querySelector('#dni').value.trim();
+      const fecha = form.querySelector('#fecha').value;
+      const direccion = form.querySelector('#direccion').value.trim();
+      const empresa = form.querySelector('#empresa').value.trim();
+      const actividad = form.querySelector('#actividad').value.trim();
+      const direccionEmpresa = form.querySelector('#direccion_empresa').value.trim();
+
+      if (!nombre || !dni || !fecha || !direccion || !empresa || !actividad || !direccionEmpresa) {
+        mensaje.textContent = 'Falta rellenar un campo obligatorio';
+        mensaje.classList.add('error');
+        return;
+      }
+
+      const regexDNI = /^[0-9]{8}[A-Za-z]$/;
+      if (!regexDNI.test(dni)) {
+        mensaje.textContent = 'El DNI no es válido (ejemplo: 12345678A)';
+        mensaje.classList.add('error');
+        return;
+      }
+
+      form.reset();
+      mensaje.textContent = 'Enviado correctamente';
+      mensaje.classList.add('success');
+    });
+  </script>
+</body>
+</html>

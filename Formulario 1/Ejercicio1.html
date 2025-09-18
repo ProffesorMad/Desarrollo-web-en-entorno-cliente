@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 1</title>
+  <style>
+    #mensaje { margin-top: 10px; font-weight: 600; }
+    .error { color: #c00000; }      
+    .success { color: #0a8b00; }
+  </style>
+</head>
+<body>
+  <form id="miFormulario" method="get" action="/registardatos.php">
+    <label>
+      Ingrese su nombre:
+      <input type="text" name="nombre" size="30">
+    </label>
+    <br><br>
+
+    Seleccione los lenguajes que conoces: <br><br>
+    <label><input type="checkbox" name="lenguaje[]" value="java"> Java</label><br>
+    <label><input type="checkbox" name="lenguaje[]" value="c++"> C++</label><br>
+    <label><input type="checkbox" name="lenguaje[]" value="c"> C</label><br>
+    <label><input type="checkbox" name="lenguaje[]" value="c#"> C#</label><br><br>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje" role="alert" aria-live="polite"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('miFormulario');
+    const mensaje = document.getElementById('mensaje');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      mensaje.textContent = '';
+      mensaje.className = '';
+
+      const nombre = form.querySelector('input[name="nombre"]').value.trim();
+      const checkboxes = Array.from(form.querySelectorAll('input[name="lenguaje[]"]'));
+      const anyChecked = checkboxes.some(cb => cb.checked);
+      if (nombre === '' || !anyChecked) {
+        mensaje.textContent = 'Falta rellenar un campo';
+        mensaje.classList.add('error');
+        if (nombre === '') {
+          form.querySelector('input[name="nombre"]').focus();
+        } else {
+          checkboxes[0].focus();
+        }
+        return;
+      }
+      form.reset();
+      mensaje.textContent = 'Enviado Correctamente:';
+      mensaje.classList.add('success');
+    });
+  </script>
+</body>
+</html>
