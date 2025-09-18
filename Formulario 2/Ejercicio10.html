@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 10</title>
+  <style>
+    form {
+      max-width: 500px;
+      margin: 20px;
+      padding: 15px;
+      border: 1px solid #999;
+      border-radius: 6px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+    input[type="submit"] {
+      margin-top: 12px;
+      padding: 6px 14px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #mensaje {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    .error { color: #c00000; }
+    .success { color: #0a8b00; }
+  </style>
+</head>
+<body>
+  <h2>Formulario de comentarios</h2>
+  <form id="formComentarios" novalidate>
+    <label for="nombre">Ingrese su nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+
+    <label for="mail">Ingrese su mail:</label>
+    <input type="email" id="mail" name="mail">
+
+    <label for="dni">Ingrese su DNI:</label>
+    <input type="text" id="dni" name="dni" placeholder="12345678A">
+
+    <label for="comentarios">Comentarios:</label>
+    <textarea id="comentarios" name="comentarios"></textarea>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("formComentarios");
+    const mensaje = document.getElementById("mensaje");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      mensaje.textContent = "";
+      mensaje.className = "";
+
+      const nombre = form.nombre.value.trim();
+      const mail = form.mail.value.trim();
+      const dni = form.dni.value.trim();
+
+      if (nombre === "" || mail === "" || dni === "") {
+        mensaje.textContent = "Falta rellenar un campo obligatorio.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      const correoValido = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+      if (!correoValido.test(mail)) {
+        mensaje.textContent = "El correo electrónico no es válido.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      const dniValido = /^\d{8}[A-Za-z]$/;
+      if (!dniValido.test(dni)) {
+        mensaje.textContent = "El DNI no es válido. Formato: 8 números y 1 letra.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      form.reset();
+      mensaje.textContent = "Formulario enviado correctamente.";
+      mensaje.classList.add("success");
+    });
+  </script>
+</body>
+</html>

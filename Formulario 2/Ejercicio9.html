@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicios 9</title>
+  <style>
+    form {
+      max-width: 450px;
+      margin: 20px;
+      padding: 15px;
+      border: 1px solid #999;
+      border-radius: 6px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+    input[type="submit"] {
+      margin-top: 12px;
+      padding: 6px 14px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #mensaje {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    .error { color: #c00000; }
+    .success { color: #0a8b00; }
+  </style>
+</head>
+<body>
+  <h2>Reclamos</h2>
+  <form id="formReclamo" novalidate>
+    <label>Ingrese su nombre:</label>
+    <input type="text" name="nombre">
+
+    <label>Ingrese su dirección:</label>
+    <input type="text" name="direccion">
+
+    <label>Informe del problema:</label>
+    <textarea name="problema"></textarea>
+
+    <input type="submit" value="Enviar">
+    <div id="mensaje"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("formReclamo");
+    const mensaje = document.getElementById("mensaje");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      mensaje.textContent = "";
+      mensaje.className = "";
+
+      const nombre = form.nombre.value.trim();
+      const direccion = form.direccion.value.trim();
+      const problema = form.problema.value.trim();
+
+      if (nombre === "" || direccion === "" || problema === "") {
+        mensaje.textContent = "Falta rellenar un campo obligatorio.";
+        mensaje.classList.add("error");
+        return;
+      }
+
+      form.reset();
+      mensaje.textContent = "Reclamo enviado correctamente.";
+      mensaje.classList.add("success");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 8</title>
+  <style>
+    form {
+      max-width: 500px;
+      margin: 20px;
+      padding: 12px;
+      border: 1px solid #999;
+      border-radius: 6px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+      height: 150px;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label>Nombre de la empresa:</label>
+    <input type="text" value="MiEmpresa S.A." readonly>
+
+    <label>Contrato:</label>
+    <textarea readonly>
+Este contrato establece las condiciones de servicio entre MiEmpresa S.A. y el cliente.
+El cliente acepta los términos aquí expuestos al hacer uso de los productos o servicios.
+    </textarea>
+  </form>
+</body>
+</html>
