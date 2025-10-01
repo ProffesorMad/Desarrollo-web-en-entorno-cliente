@@ -103,3 +103,44 @@ document.getElementById("7").innerHTML += "<p>" + numeros30.join(", ") + "</p>";
 
 /*Muestra en el documento HTML el factorial de un número que se inserta por teclado. 
   Declara dos variables: para el número y para el resultado. Emplea un formulario */ 
+
+document.getElementById("factorialForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita recargar la página
+
+    let numerof = parseInt(document.getElementById("numeroFactorial").value);
+    let resultadof = 1;
+
+    for (let i = 1; i <= numerof; i++) {
+        resultadof *= i;
+    }
+
+    document.getElementById("resultadoFactorial").innerHTML = 
+        "<p>El factorial de " + numerof + " es: " + resultadof + "</p>";
+});
+
+/*Crea un script para que al accionar un botón, solicite insertar el nombre de una
+  ciudad. Muestra en una ventana, la elección múltiple de 3 ciudades con switch.
+  Tienes que declarar las siguientes ciudades (Zaragoza, Barcelona, Madrid) y que
+  cada una tenga su propio mensaje. */
+
+  function preguntarCiudad() {
+    let ciudad = prompt("¿Cuál es tu ciudad favorita? (Zaragoza, Barcelona, Madrid)");
+
+    let mensaje;
+
+    switch (ciudad.toLowerCase()) {
+        case "zaragoza":
+            mensaje = "Maravillosa gente. Capital del Ebro.";
+            break;
+        case "barcelona":
+            mensaje = "Ciudad cosmopolita con la Sagrada Familia.";
+            break;
+        case "madrid":
+            mensaje = "La capital de España, siempre con vida.";
+            break;
+        default:
+            mensaje = "No conozco esa ciudad...";
+    }
+
+    document.getElementById("resultadoCiudad").innerHTML = "<p>" + mensaje + "</p>";
+}
