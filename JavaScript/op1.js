@@ -24,37 +24,37 @@ document.getElementById("1").innerHTML +=
 
 //Calcula el exponencial de cualquier número
 
-let numeroExp = parseFloat(prompt("Calcular su exponencial:"));
-let resultadoExp = Math.exp(numeroExp);
+let numeroE = parseFloat(prompt("Calcular su exponencial:"));
+let resultadoE = Math.exp(numeroE);
 
 document.getElementById("2").innerHTML += 
-    "<p>El exponencial de " + numeroExp + " es: " + resultadoExp + "</p>";
+    "<p>El exponencial de " + numeroE + " es: " + resultadoE + "</p>";
 
 /*Crea un script para calcular números pares e impares. Los números se introducen 
     por teclado y emplear el módulo %. */
 
-let numeroParImpar = parseInt(prompt("¿Par o Impar?:"));
-let resultadoParImpar = (numeroParImpar % 2 === 0) ? "Par" : "Impar";
+let numeroImPa = parseInt(prompt("¿Par o Impar?:"));
+let resultadoImPa = (numeroImPa % 2 === 0) ? "Par" : "Impar";
 
 document.getElementById("3").innerHTML += 
-    "<p>El número " + numeroParImpar + " es " + resultadoParImpar + "</p>";
+    "<p>El número " + numeroImPa + " es " + resultadoImPa + "</p>";
 
 
 //Detectar si un número es múltiplo de otro número.
 
-let num1Multiplo = parseInt(prompt("Primer multiplo:"));
-let num2Multiplo = parseInt(prompt("Segundo multiplo:"));
-let resultadoMultiplo;
+let num1M = parseInt(prompt("Primer multiplo:"));
+let num2M = parseInt(prompt("Segundo multiplo:"));
+let resultadoM;
 
-if (num2Multiplo === 0) {
-    resultadoMultiplo = "No se puede dividir entre 0";
-} else if (num1Multiplo % num2Multiplo === 0) {
-    resultadoMultiplo = num1Multiplo + " es múltiplo de " + num2Multiplo;
+if (num2M === 0) {
+    resultadoM = "No se puede dividir entre 0";
+} else if (num1M % num2M === 0) {
+    resultadoM = num1M + " es múltiplo de " + num2M;
 } else {
-    resultadoMultiplo = num1Multiplo + " no es múltiplo de " + num2Multiplo;
+    resultadoM = num1M + " no es múltiplo de " + num2M;
 }
 
-document.getElementById("4").innerHTML += "<p>" + resultadoMultiplo + "</p>";
+document.getElementById("4").innerHTML += "<p>" + resultadoM + "</p>";
 
 //Crea un Array que almacene los 12 meses del año y muestra cada mes empleando un for
 
@@ -100,3 +100,6 @@ for (let i = 1; i <= 30; i++) {
 }
 
 document.getElementById("7").innerHTML += "<p>" + numeros30.join(", ") + "</p>";
+
+/*Muestra en el documento HTML el factorial de un número que se inserta por teclado. 
+  Declara dos variables: para el número y para el resultado. Emplea un formulario */ 
