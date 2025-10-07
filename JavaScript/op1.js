@@ -1,12 +1,31 @@
+function pedirNumero(mensaje, min = -Infinity, max = Infinity) {
+    let valor;
+    do {
+        let input = prompt(mensaje);
+        if (input === null || input.trim() === "") continue;
+        valor = Number(input);
+    } while (isNaN(valor) || valor < min || valor > max);
+    return valor;
+}
+
+function pedirString(mensaje) {
+    let valor;
+    do {
+        valor = prompt(mensaje);
+        if (valor === null || valor.trim() === "") continue;
+    } while (!isNaN(valor));
+    return valor;
+}
+
 //Datos personales y año de nacimiento
 
-let nombre = prompt("Nombre:");
-let apellido = prompt("Apellido:");
+let nombre = pedirString("Nombre:");
+let apellido = pedirString("Apellido:");
 let fullName = nombre + " " + apellido;
 
-let edad = parseInt(prompt("Edad:"));
-let diaNacimiento = parseInt(prompt("Día de nacimiento (1-31):"));
-let mesNacimiento = parseInt(prompt("Mes de nacimiento (1-12):"));
+let edad = pedirNumero("Edad:", 0, 120);
+let diaNacimiento = pedirNumero("Día de nacimiento (1-31):", 1, 31);
+let mesNacimiento = pedirNumero("Mes de nacimiento (1-12):", 1, 12);
 
 let fechaActual = new Date();
 let añoActual = fechaActual.getFullYear();
@@ -24,7 +43,7 @@ document.getElementById("1").innerHTML +=
 
 //Calcula el exponencial de cualquier número
 
-let numeroE = parseFloat(prompt("Calcular su exponencial:"));
+let numeroE = pedirNumero("Calcular su exponencial:");
 let resultadoE = Math.exp(numeroE);
 
 document.getElementById("2").innerHTML += 
@@ -33,7 +52,7 @@ document.getElementById("2").innerHTML +=
 /*Crea un script para calcular números pares e impares. Los números se introducen 
     por teclado y emplear el módulo %. */
 
-let numeroImPa = parseInt(prompt("¿Par o Impar?:"));
+let numeroImPa = pedirNumero("¿Par o Impar?:");
 let resultadoImPa = (numeroImPa % 2 === 0) ? "Par" : "Impar";
 
 document.getElementById("3").innerHTML += 
@@ -42,8 +61,8 @@ document.getElementById("3").innerHTML +=
 
 //Detectar si un número es múltiplo de otro número.
 
-let num1M = parseInt(prompt("Primer multiplo:"));
-let num2M = parseInt(prompt("Segundo multiplo:"));
+let num1M = pedirNumero("Primer multiplo:");
+let num2M = pedirNumero("Segundo multiplo:");
 let resultadoM;
 
 if (num2M === 0) {
@@ -70,8 +89,8 @@ document.getElementById("5").innerHTML += meses.join(", ");
 //Compara dos números enteros para saber cual es mayor. 
 // Además comprueba si son positivos
 
-let numA = parseInt(prompt("Primer número para comparar:"));
-let numB = parseInt(prompt("Segundo número para comparar:"));
+let numA = pedirNumero("Primer número para comparar:");
+let numB = pedirNumero("Segundo número para comparar:");
 
 let comparacion;
 if (numA > numB) {
@@ -109,6 +128,11 @@ document.getElementById("factorialForm").addEventListener("submit", function(eve
     event.preventDefault();
 
     let numerof = parseInt(document.getElementById("numeroFactorial").value);
+    if (isNaN(numerof) || numerof < 0) {
+        alert("Introduce un número entero positivo.");
+        return;
+    }
+
     let resultadof = 1;
 
     for (let i = 1; i <= numerof; i++) {
@@ -124,8 +148,8 @@ document.getElementById("factorialForm").addEventListener("submit", function(eve
   Tienes que declarar las siguientes ciudades (Zaragoza, Barcelona, Madrid) y que
   cada una tenga su propio mensaje. */
 
-  function preguntarCiudad() {
-    let ciudad = prompt("¿Cuál es tu ciudad favorita? (Zaragoza, Barcelona, Madrid)");
+function preguntarCiudad() {
+    let ciudad = pedirString("¿Cuál es tu ciudad favorita? (Zaragoza, Barcelona, Madrid)");
 
     let mensaje;
 

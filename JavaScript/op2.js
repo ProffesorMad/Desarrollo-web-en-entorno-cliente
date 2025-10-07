@@ -1,3 +1,22 @@
+function pedirNumero(mensaje, min = -Infinity, max = Infinity) {
+    let valor;
+    do {
+        let input = prompt(mensaje);
+        if (input === null || input.trim() === "") continue;
+        valor = Number(input);
+    } while (isNaN(valor) || valor < min || valor > max);
+    return valor;
+}
+
+function pedirString(mensaje) {
+    let valor;
+    do {
+        valor = prompt(mensaje);
+        if (valor === null || valor.trim() === "") continue;
+    } while (!isNaN(valor));
+    return valor;
+}
+
 /*Realiza una aplicación Web, que mediante JavaScript muestre el siguiente aviso.
   Para ello, debes crear una variable de tipo String llamada mensaje.*/
 
@@ -7,7 +26,7 @@ alert(mensaje);
 /*Realiza una aplicación Web, que mediante JavaScript haga divisiones en binario
   con desplazamiento a la derecha. */
 
-let numeroDiv = parseInt(prompt("Numero para Dividir Binario:"));
+let numeroDiv = pedirNumero("Numero para Dividir Binario:");
 let resultadoDiv = numeroDiv >> 1;
 document.getElementById("2-2").innerHTML += `
     <p>Decimal: ${resultadoDiv}</p>
@@ -17,8 +36,8 @@ document.getElementById("2-2").innerHTML += `
 /*Realiza una aplicación Web, que mediante JavaScript haga multiplicaciones en
   binario con desplazamiento a la izquierda */
 
-let numeroMul = parseInt(prompt("Numero para Multiplicar Binario:"));
-let desplazamiento = parseInt(prompt("Cuantos bits desplazar:"));
+let numeroMul = pedirNumero("Numero para Multiplicar Binario:");
+let desplazamiento = pedirNumero("Cuantos bits desplazar:", 0);
 let resultadoMul = numeroMul << desplazamiento;
 document.getElementById("2-3").innerHTML += `
     <p>Decimal: ${resultadoMul}</p>
@@ -44,7 +63,7 @@ están escritas en minúsculas, mayúsculas ó ambas. De manera adicional, mejor
 la aplicación anterior, para poder evaluar cualquier
 cadena de texto que introduce el usuario. */
 
-let cadena = prompt("Escribe:");
+let cadena = pedirString("Escribe:");
 function comprobarCadena(cadena) {
     if (cadena === cadena.toUpperCase()) return "Está en MAYÚSCULAS";
     if (cadena === cadena.toLowerCase()) return "Está en minúsculas";
