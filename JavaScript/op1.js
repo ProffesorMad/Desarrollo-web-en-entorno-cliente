@@ -67,7 +67,8 @@ let meses = [
 document.getElementById("5").innerHTML += meses.join(", ");
 
 
-//Compara dos números enteros para saber cual es mayor. Además comprueba si son positivos
+//Compara dos números enteros para saber cual es mayor. 
+// Además comprueba si son positivos
 
 let numA = parseInt(prompt("Primer número para comparar:"));
 let numB = parseInt(prompt("Segundo número para comparar:"));
@@ -105,7 +106,7 @@ document.getElementById("7").innerHTML += "<p>" + numeros30.join(", ") + "</p>";
   Declara dos variables: para el número y para el resultado. Emplea un formulario */ 
 
 document.getElementById("factorialForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita recargar la página
+    event.preventDefault();
 
     let numerof = parseInt(document.getElementById("numeroFactorial").value);
     let resultadof = 1;
