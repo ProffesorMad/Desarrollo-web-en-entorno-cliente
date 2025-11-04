@@ -127,3 +127,67 @@ for(let i = filas; i >= 1; i--){
 
 document.getElementById("ej8").innerHTML = salida;
 
+// EJERCICIO 9
+
+let valor = "";  
+let operacion = "";      
+let numeroAnterior = ""; 
+
+function num(n){
+    valor += n;
+    document.getElementById("pantalla").value = valor;
+    document.getElementById("historial").value = numeroAnterior + " " + operacion + " " + valor;
+}
+
+function oper(op){
+    numeroAnterior = valor;
+    operacion = op;
+    valor = "";
+    document.getElementById("pantalla").value = "";
+    document.getElementById("historial").value = numeroAnterior + " " + operacion;
+}
+
+function calcular(){
+    let numeroActual = parseFloat(valor);
+    let primero = parseFloat(numeroAnterior);
+    let resultado = 0;
+
+    switch(operacion){
+        case "+": resultado = primero + numeroActual; break;
+        case "-": resultado = primero - numeroActual; break;
+        case "*": resultado = primero * numeroActual; break;
+        case "/": resultado = primero / numeroActual; break;
+    }
+
+    document.getElementById("pantalla").value = resultado;
+    document.getElementById("historial").value = primero + " " + operacion + " " + numeroActual + " =";
+
+    valor = "" + resultado;
+}
+
+function borrar(){
+    valor = "";
+    operacion = "";
+    numeroAnterior = "";
+    document.getElementById("pantalla").value = "";
+    document.getElementById("historial").value = "";
+}
+
+function raiz(){
+    let r = Math.sqrt(parseFloat(valor));
+    document.getElementById("pantalla").value = r;
+    document.getElementById("historial").value = `√${valor} =`;
+    valor = "" + r;
+}
+
+// EJERCICIO 10 
+
+function myfunction9(){
+    document.getElementById("demo9").innerHTML += 
+    "<br><br>...centro, para que a cualquier persona de nuestra comunidad educativa le resulte mas accesible realizar su donación de sangre." +
+    "<br>La siguiente donación será:" +
+    "<br>Fecha: Martes 3 de octubre." +
+    "<br>Lugar: Biblioteca del IES" +
+    "<br>Horario: de 9:30 a 13:00 horas" +
+    "<br><br>Recordad que TODOS EN CUALQUIER MOMENTO PODEMOS NECESITAR SANGRE";
+}
