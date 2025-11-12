@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="formulario">
+        <textarea name="mitexto" placeholder="Introduce una frase" cols="30" rows="5"></textarea>
+        <br>
+        <input type="button" value="clickear" onclick="pulsar()"></input>
+    </form>
+    <div id="palabras"></div>
+    <div id="calificaciones"></div>
+
+<script>
+    /* Para el div palabras: 
+    - Calcula y muestra el numero de palabras que están escritas en el textarea
+    - Muestra la ultima y la primera palabra del textarea
+    */
+
+    function pulsar() {
+        let texto = document.formulario.mitexto.value.trim(); // texto del textarea
+        let palabrasDiv = document.getElementById("palabras");
+        let calificacionesDiv = document.getElementById("calificaciones");
+
+        // --- PRIMERA PARTE: DIV PALABRAS ---
+        if (texto.length == 0) {
+            palabrasDiv.innerHTML = "<b>No has introducido ninguna palabra.</b>";
+        } else {
+            // Dividir el texto en palabras, separando por espacios
+            let palabras = texto.split(/\s+/);
+            let numPalabras = palabras.length;
+            let primera = palabras[0];
+            let ultima = palabras[palabras.length - 1];
+
+            palabrasDiv.innerHTML = `
+                <p><b>Número de palabras:</b> ${numPalabras}</p>
+                <p><b>Primera palabra:</b> ${primera}</p>
+                <p><b>Última palabra:</b> ${ultima}</p>
+            `;
+        }
+
+        /* Para el div calificaciones: 
+        Dado el siguiente array de notas de clase en la 1ª Evaluación. 
+        var notas = new Array(4.5, 4, 6, 1, 7.5, 10, 5.25, 4.5, 2, 1, 8,7.5, 1, 7.5, 8);
+        - Sacar el numero de alumnos aprobados
+        - Dado este array, sacar por pantalla todas las notas que no están repetidas
+        - Crea una funcion para comprobar las notas que estan por debajo de 5. Llama a esta función para sacar las notas pares de los alumnos que han suspendido
+        - Sacar las notas impares de los alumnos que han sacado al menos un 7
+        - Elimina del array las notas por debajo de 5
+        - Crea una función aleatoria que calcule numeros entre 5 y 10 sin decimales
+        - Llama a esta funcion aleatoria para rellenar el array, respetando las notas que no han sido eliminadas. 
+        - Muestra por pantalla el array con los nuevos elementos ordenandos de mayor a menor.
+        */
+
+        // --- SEGUNDA PARTE: DIV CALIFICACIONES ---
+        var notas = new Array(4.5, 4, 6, 1, 7.5, 10, 5.25, 4.5, 2, 1, 8, 7.5, 1, 7.5, 8);
+        let salida = "";
+
+        // 1️⃣ Número de alumnos aprobados
+        let aprobados = notas.filter(n => n >= 5).length;
+        salida += `<p><b>Número de aprobados:</b> ${aprobados}</p>`;
+
+        // 2️⃣ Notas no repetidas
+        let noRepetidas = notas.filter((n, i, arr) => arr.indexOf(n) === arr.lastIndexOf(n));
+        salida += `<p><b>Notas no repetidas:</b> ${noRepetidas.join(", ")}</p>`;
+
+        // 3️⃣ Función para comprobar las notas por debajo de 5
+        function suspensos(notas) {
+            return notas.filter(n => n < 5);
+        }
+
+        // Notas pares de alumnos que han suspendido
+        let susp = suspensos(notas);
+        let notasParesSuspensos = [];
+        for (let n of susp) {
+            if (Math.floor(n) % 2 === 0) notasParesSuspensos.push(n);
+        }
+        salida += `<p><b>Notas pares de suspensos:</b> ${notasParesSuspensos.join(", ") || "Ninguna"}</p>`;
+
+        // 4️⃣ Notas impares de alumnos con nota >=7
+        let notasAltas = notas.filter(n => n >= 7);
+        let notasImparesAltas = [];
+        for (let nota of notasAltas) {
+            if (Math.floor(nota) % 2 !== 0) notasImparesAltas.push(nota);
+        }
+        salida += `<p><b>Notas impares de alumnos con nota ≥7:</b> ${notasImparesAltas.join(", ") || "Ninguna"}</p>`;
+
+        // 5️⃣ Elimina del array las notas por debajo de 5
+        notas = notas.filter(n => n >= 5);
+
+        // 6️⃣ Función aleatoria entre 5 y 10 sin decimales
+        function aleatoria() {
+            return Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+        }
+
+        // 7️⃣ Rellena el array con nuevos valores aleatorios hasta tener 15 notas de nuevo
+        while (notas.length < 15) {
+            notas.push(aleatoria());
+        }
+
+        // 8️⃣ Ordena de mayor a menor
+        notas.sort((a, b) => b - a);
+        salida += `<p><b>Nuevo array ordenado (mayor a menor):</b> ${notas.join(", ")}</p>`;
+
+        // Mostrar resultados en el div calificaciones
+        calificacionesDiv.innerHTML = salida;
+    }
+</script>
+</body>
+</html>
