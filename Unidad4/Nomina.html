@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculo de Nómina</title>
+    <script src="Nomina.js"></script>
+</head>
+
+<body>
+
+    <h2>Cálculo de Nómina</h2>
+
+    <form id="formNomina">
+        <label>Salario bruto anual (€):</label><br>
+        <input type="number" id="salario" required><br><br>
+
+        <label>Retención (%):</label><br>
+        <input type="number" id="retencion" required><br><br>
+
+        <label>Número de pagas:</label><br>
+        <input type="number" id="pagas" required><br><br>
+
+        <button type="button" onclick="calcularNomina()">Calcular</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+
+</body>
+</html>
