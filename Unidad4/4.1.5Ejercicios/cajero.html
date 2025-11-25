@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero Automático</title>
+</head>
+<body>
+
+    <h1>Cajero Automático</h1>
+
+    <h2>Inicio de sesión</h2>
+    <input type="password" id="pin" placeholder="Introduce PIN">
+    <button onclick="validarPin()">Validar PIN</button>
+    <p id="login-msg"></p>
+
+    <hr>
+
+    <h2>Operaciones</h2>
+    <button onclick="consultarSaldo()">Consultar Saldo</button>
+    <button onclick="sacarDinero()">Sacar Dinero</button>
+
+    <p id="resultado"></p>
+
+    <script src="cajero.js"></script>
+</body>
+</html>
