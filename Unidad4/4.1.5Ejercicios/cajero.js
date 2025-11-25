@@ -8,11 +8,11 @@ const validarPin = () => {
 
     if (inputPin === PIN_CORRECTO) {
         accesoPermitido = true;
-        mensaje.textContent = "✔ PIN correcto. Bienvenido.";
+        mensaje.textContent = "PIN correcto. Bienvenido.";
         mensaje.style.color = "green";
     } else {
         accesoPermitido = false;
-        mensaje.textContent = "✖ PIN incorrecto.";
+        mensaje.textContent = "PIN incorrecto.";
         mensaje.style.color = "red";
     }
 };
