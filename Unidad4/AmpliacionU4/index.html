@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Demo Gestor de Presupuesto</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    label { display:block; margin-top: .5rem }
+    input[type="number"], input[type="text"], input[type="date"] { width: 100%; padding: .4rem }
+    button { margin-top: .6rem }
+    .gastos { margin-top: 1rem }
+    .gasto { border-bottom: 1px solid #ddd; padding: .4rem 0 }
+  </style>
+</head>
+<body>
+  <h1>Gestor de Presupuesto</h1>
+
+  <section>
+    <h2>Presupuesto</h2>
+    <label>Nueva cantidad (€)
+      <input id="inputPresupuesto" type="number" step="0.01" value="0">
+    </label>
+    <button id="btnActualizarPresupuesto">Actualizar presupuesto</button>
+    <p id="parPresupuesto">Tu presupuesto actual es de 0 €</p>
+  </section>
+
+  <section>
+    <h2>Añadir gasto</h2>
+    <label>Descripción
+      <input id="inputDesc" type="text" placeholder="ej. Compra supermercado">
+    </label>
+    <label>Valor (€)
+      <input id="inputValor" type="number" step="0.01" value="0">
+    </label>
+    <label>Fecha
+      <input id="inputFecha" type="date">
+    </label>
+    <label>Etiquetas (separadas por comas)
+      <input id="inputEtiquetas" type="text" placeholder="ej. comida, hogar">
+    </label>
+    <button id="btnAgregarGasto">Agregar gasto</button>
+
+    <div class="gastos" id="listaGastos"></div>
+  </section>
+
+  <script type="module">
+    import { mostrarPresupuesto, actualizarPresupuesto, CrearGasto } from './gestorPresupuesto.js';
+
+    const parPresupuesto = document.getElementById('parPresupuesto');
+    const inputPresupuesto = document.getElementById('inputPresupuesto');
+    const btnActualizarPresupuesto = document.getElementById('btnActualizarPresupuesto');
+
+    const inputDesc = document.getElementById('inputDesc');
+    const inputValor = document.getElementById('inputValor');
+    const inputFecha = document.getElementById('inputFecha');
+    const inputEtiquetas = document.getElementById('inputEtiquetas');
+    const btnAgregarGasto = document.getElementById('btnAgregarGasto');
+    const listaGastos = document.getElementById('listaGastos');
+
+    const gastos = [];
+
+    parPresupuesto.textContent = mostrarPresupuesto();
+
+    btnActualizarPresupuesto.addEventListener('click', () => {
+      const val = parseFloat(inputPresupuesto.value);
+      try {
+        const res = actualizarPresupuesto(val);
+        if (res === -1) {
+          alert('No se puede establecer un presupuesto negativo');
+        } else {
+          parPresupuesto.textContent = mostrarPresupuesto();
+        }
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+
+    btnAgregarGasto.addEventListener('click', () => {
+      const desc = inputDesc.value.trim();
+      const val = parseFloat(inputValor.value);
+      const fecha = inputFecha.value || null;
+      const etiquetas = inputEtiquetas.value ? inputEtiquetas.value.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      if (!desc) {
+        alert('Debe introducir una descripción');
+        return;
+      }
+
+      try {
+        const g = new CrearGasto(desc, val, fecha, ...etiquetas);
+        gastos.push(g);
+        renderGastos();
+        inputDesc.value = '';
+        inputValor.value = '0';
+        inputFecha.value = '';
+        inputEtiquetas.value = '';
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+
+    function renderGastos() {
+      listaGastos.innerHTML = '';
+      gastos.forEach((g, i) => {
+        const div = document.createElement('div');
+        div.className = 'gasto';
+        div.innerHTML = `
+          <strong>${g.descripcion}</strong>
+          <p>${g.mostrarGasto()}</p>
+          <p>Fecha: ${g.fecha ? new Date(g.fecha).toLocaleDateString() : '—'}</p>
+          <p>Etiquetas: ${g.etiquetas.join(', ') || '—'}</p>
+          <button data-idx="${i}" class="btnEditar">Editar</button>
+        `;
+        listaGastos.appendChild(div);
+      });
+
+      document.querySelectorAll('.btnEditar').forEach(btn => {
+        btn.addEventListener('click', (ev) => {
+          const idx = Number(ev.currentTarget.dataset.idx);
+          const nuevo = prompt('Nueva descripción', gastos[idx].descripcion);
+          if (nuevo !== null) {
+            gastos[idx].actualizarDescripcion(nuevo);
+            renderGastos();
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
