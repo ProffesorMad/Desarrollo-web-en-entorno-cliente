@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Presupuesto y Gastos</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, button { padding: 6px; margin: 5px 0; }
+        .gasto {
+            background: #f3f3f3;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gestión de Presupuesto y Gastos</h1>
+
+    <h2>Actualizar presupuesto</h2>
+    <input type="number" id="presupuestoInput" placeholder="Nuevo presupuesto">
+    <button onclick="btnActualizarPresupuesto()">Actualizar</button>
+
+    <p id="presupuestoActual"></p>
+
+    <h2>Crear un gasto</h2>
+    <input type="text" id="desc" placeholder="Descripción"><br>
+    <input type="number" id="valor" placeholder="Valor"><br>
+    <input type="date" id="fecha"><br>
+    <input type="text" id="etiquetas" placeholder="Etiquetas separadas por coma"><br>
+    <button onclick="btnCrearGasto()">Crear gasto</button>
+
+    <h2>Gastos creados</h2>
+    <div id="listaGastos"></div>
+    
+    <script src="js.js"></script>
+
+</body>
+</html>
