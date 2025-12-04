@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Gestión de Usuarios</title>
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+<h1>Gestión de Usuarios</h1>
+
+<form id="formDatos">
+    <label>Nombre: <input type="text" id="nombre"></label><br>
+    <label>Apellidos: <input type="text" id="apellidos"></label><br>
+    <label>Email: <input type="email" id="email"></label><br>
+    <label>Usuario: <input type="text" id="usuario"></label><br>
+    <label>DNI: <input type="text" id="dni"></label><br><br>
+
+    <button type="button" id="btnHabilitarBanco">Habilitar banco</button>
+</form>
+
+<br>
+
+<form id="formBanco">
+    <label>IBAN: <input type="text" id="iban"></label><br>
+    <label>CCC: <input type="text" id="ccc"></label><br>
+    <label>Contraseña: <input type="password" id="contrasena"></label><br><br>
+
+    <button type="button" id="btnEnviar" disabled>Enviar</button>
+</form>
+
+<p id="mensaje"></p>
+
+</body>
+</html>
