@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Reservas Hotel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Reservas de Hotel</h1>
+  <form id="formReserva">
+    <label>Nombre: <input id="nombre" required></label><br>
+    <label>Fecha entrada: <input id="entrada" type="date" required></label><br>
+    <label>Fecha salida: <input id="salida" type="date" required></label><br>
+    <label>Nº personas: <input id="personas" type="number" min="1" value="1" required></label><br>
+    <button id="btnAdd" type="button">Añadir reserva</button>
+  </form>
+
+  <h2>Reservas</h2>
+  <table id="tabla">
+    <thead><tr><th>#</th><th>Nombre</th><th>Entrada</th><th>Salida</th><th>Días</th><th>Personas</th><th>Acciones</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <p>Total personas reservadas: <span id="totalPersonas">0</span></p>
+
+  <script src="script.js"></script>
+</body>
+</html>

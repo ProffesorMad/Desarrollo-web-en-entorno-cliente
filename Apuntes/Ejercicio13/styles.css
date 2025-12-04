@@ -1,0 +1,4 @@
+/* styles.css - mínimo */
+table { border-collapse: collapse; width: 100%;}
+td, th { border: 1px solid #ccc; padding: 6px; }
+.tr-larga { background: #fdd; } /* para reservas >7 días */
