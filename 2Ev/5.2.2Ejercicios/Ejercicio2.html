@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        img {
+            width: 520px;  
+            margin: 40px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 12px;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        #resultado {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+    <img src="Imagenes/Cb.png" alt="V"
+         onmouseover="reconocer('V')"
+         onmouseout="fueraImagen()">
+
+    <img src="Imagenes/Cb2.png" alt="Night City"
+         onmouseover="reconocer('Night City')"
+         onmouseout="fueraImagen()">
+
+    <div id="resultado">No Reconoce Ninguna Imagen</div>
+
+    <script>
+        function reconocer(tipo) {
+            document.getElementById("resultado").textContent = tipo;
+        }
+
+        function fueraImagen() {
+            document.getElementById("resultado").textContent = "No Reconoce Ninguna Imagen";
+        }
+    </script>
+
+</body>
+</html>

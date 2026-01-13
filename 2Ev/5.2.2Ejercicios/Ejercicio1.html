@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        img {
+            width: 650px;
+            margin-top: 40px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="imagen"
+         src="Imagenes/Wakeup.png"
+         onmouseover="cambiarImagen()"
+         onmouseout="volverImagen()">
+
+    <script>
+        function cambiarImagen() {
+            document.getElementById("imagen").src="Imagenes/Wakeup2.png";
+        }
+
+        function volverImagen() {
+            document.getElementById("imagen").src="Imagenes/Wakeup.png";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 2000px;
+        }
+
+        #info {
+            width: 520px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="info">
+        Mueve el ratón o pulsa una tecla
+    </div>
+
+    <script>
+        function muestraInformacion(texto, color) {
+            const info = document.getElementById("info");
+            info.innerHTML = texto;
+            info.style.backgroundColor = color;
+        }
+
+        document.addEventListener("mousemove", function (evento) {
+            let mensaje =
+                "<strong>Evento del ratón</strong><br><br>" +
+                "<strong>Ventana:</strong> [" + evento.clientX + ", " + evento.clientY + "]<br>" +
+                "<strong>Documento:</strong> [" + evento.pageX + ", " + evento.pageY + "]<br>" +
+                "<strong>Pantalla:</strong> [" + evento.screenX + ", " + evento.screenY + "]";
+
+            muestraInformacion(mensaje, "white");
+        });
+
+        document.addEventListener("mousedown", function () {
+            muestraInformacion(
+                "<strong>Evento del ratón</strong><br>Botón del ratón pulsado",
+                "#FFFFCC"
+            );
+        });
+
+        document.addEventListener("keydown", function (evento) {
+            let mensaje =
+                "<strong>Evento del teclado</strong><br><br>" +
+                "Tecla pulsada: " + evento.key + "<br>" +
+                "Código de la tecla: " + evento.code;
+
+            muestraInformacion(mensaje, "#CCE6FF");
+        });
+    </script>
+
+</body>
+</html>

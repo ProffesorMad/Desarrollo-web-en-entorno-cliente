@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #mensaje {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border: 1px solid black;
+            background-color: #f4f4f4;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mensaje">
+        Haz clic en cualquier parte de la pantalla
+    </div>
+
+    <script>
+        document.addEventListener("click", function (evento) {
+
+            const ancho = window.innerWidth;
+            const alto = window.innerHeight;
+
+            let zona = "";
+
+            if (evento.clientX < ancho / 2 && evento.clientY < alto / 2) {
+                zona = "Izquierda arriba";
+            } else if (evento.clientX < ancho / 2 && evento.clientY >= alto / 2) {
+                zona = "Izquierda abajo";
+            } else if (evento.clientX >= ancho / 2 && evento.clientY < alto / 2) {
+                zona = "Derecha arriba";
+            } else {
+                zona = "Derecha abajo";
+            }
+
+            document.getElementById("mensaje").innerHTML =
+                "Zona: <strong>" + zona + "</strong><br>" +
+                "Coordenadas: [" + evento.clientX + ", " + evento.clientY + "]";
+        });
+    </script>
+
+</body>
+</html>
