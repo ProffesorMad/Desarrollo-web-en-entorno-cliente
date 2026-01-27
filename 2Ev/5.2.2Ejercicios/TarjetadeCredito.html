@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validación tarjeta</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eee;
+        }
+
+        form {
+            width: 520px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .numeros {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        .numeros input {
+            width: 95px;
+            padding: 12px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .numeros input:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74,144,226,0.3);
+        }
+
+        label {
+            display: block;
+            margin-top: 25px;
+            font-weight: 600;
+            color: #ccc;
+        }
+
+        input[type="month"] {
+            width: 220px;
+            margin-top: 8px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #2b2b2b;
+            border-radius: 8px;
+            border: 1px solid #444;
+            color: #fff;
+            outline: none;
+        }
+
+        button {
+            margin-top: 30px;
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #4a90e2, #357bd8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        #mensaje {
+            margin-top: 22px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 17px;
+            min-height: 22px;
+            color: #9fd1ff;
+        }
+    </style>
+</head>
+<body>
+
+<form id="formulario">
+    <h3>Tarjeta de crédito</h3>
+
+    <div class="numeros">
+        <input type="text" maxlength="4">
+        <input type="text" maxlength="4">
+        <input type="text" maxlength="4">
+        <input type="text" maxlength="4">
+    </div>
+
+    <label for="fecha">Fecha de caducidad</label>
+    <input type="month" id="fecha">
+
+    <button type="submit">Validar tarjeta</button>
+
+    <div id="mensaje"></div>
+</form>
+
+<script>
+    const inputs = document.querySelectorAll(".numeros input");
+    const formulario = document.getElementById("formulario");
+    const mensaje = document.getElementById("mensaje");
+    const fechaInput = document.getElementById("fecha");
+
+    inputs.forEach((input, index) => {
+        input.addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, "");
+            if (this.value.length === 4 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+    });
+
+    formulario.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let numeroCompleto = true;
+
+        inputs.forEach(input => {
+            if (input.value.length !== 4) {
+                numeroCompleto = false;
+            }
+        });
+
+        if (!numeroCompleto) {
+            mensaje.textContent = "Número de tarjeta incompleto";
+            return;
+        }
+
+        if (fechaInput.value === "") {
+            mensaje.textContent = "Fecha de caducidad inválida";
+            return;
+        }
+
+        const [anio, mes] = fechaInput.value.split("-");
+        const fechaCaducidad = new Date(anio, mes);
+        const fechaActual = new Date();
+
+        if (fechaCaducidad <= fechaActual) {
+            mensaje.textContent = "Fecha de caducidad caducada o inválida";
+            return;
+        }
+
+        mensaje.textContent = "Tarjeta validada";
+        formulario.reset();
+        inputs[0].focus();
+    });
+</script>
+
+</body>
+</html>
